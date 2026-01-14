@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agency Launch Mastery</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
+.nav{background:#1e293b;padding:1rem;border-bottom:1px solid #334155}
+.nav-inner{max-width:900px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.logo{display:flex;align-items:center;gap:0.75rem}
+.logo-icon{width:40px;height:40px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.25rem}
+.logo-text{font-weight:700;color:#fff}
+.nav-btns{display:flex;gap:0.5rem}
+.nav-btn{padding:0.5rem 1rem;border-radius:8px;border:none;cursor:pointer;font-size:0.875rem;background:transparent;color:#94a3b8}
+.nav-btn.active{background:rgba(99,102,241,0.2);color:#818cf8}
+.main{max-width:900px;margin:0 auto;padding:2rem 1rem}
+.hero{background:linear-gradient(135deg,#1e293b,#312e81,#1e293b);border-radius:1.5rem;padding:2rem;margin-bottom:2rem}
+.badge{display:inline-block;background:rgba(99,102,241,0.2);color:#a5b4fc;padding:0.5rem 1rem;border-radius:9999px;font-size:0.875rem;margin-bottom:1rem}
+.hero h1{font-size:2rem;color:#fff;margin-bottom:0.5rem}
+.hero p{color:#cbd5e1;margin-bottom:1.5rem}
+.btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{padding:0.75rem 1.5rem;border-radius:12px;border:none;cursor:pointer;font-weight:500}
+.btn-primary{background:#6366f1;color:#fff}
+.btn-secondary{background:rgba(255,255,255,0.1);color:#fff}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.stat{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:1.25rem}
+.stat-label{color:#94a3b8;font-size:0.875rem}
+.stat-value{font-size:1.5rem;font-weight:700;color:#fff}
+.section-title{font-size:1.25rem;font-weight:700;color:#fff;margin-bottom:1rem}
+.modules{display:grid;gap:1rem}
+.module{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:1.25rem;cursor:pointer;transition:border-color 0.2s}
+.module:hover{border-color:#475569}
+.module-header{display:flex;gap:1rem;align-items:flex-start}
+.module-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.module-icon.violet{background:linear-gradient(135deg,#8b5cf6,#a855f7)}
+.module-icon.blue{background:linear-gradient(135deg,#3b82f6,#6366f1)}
+.module-icon.emerald{background:linear-gradient(135deg,#10b981,#14b8a6)}
+.module-icon.amber{background:linear-gradient(135deg,#f59e0b,#f97316)}
+.module-content{flex:1}
+.module-title{font-weight:600;color:#fff}
+.module-sub{color:#64748b;font-size:0.875rem}
+.module-meta{color:#64748b;font-size:0.75rem;margin-top:0.5rem}
+.module-progress{font-weight:700;color:#fff}
+.progress-bar{height:6px;background:#334155;border-radius:9999px;margin-top:1rem;overflow:hidden}
+.progress-fill{height:100%;border-radius:9999px}
+.progress-fill.violet{background:linear-gradient(90deg,#8b5cf6,#a855f7)}
+.progress-fill.blue{background:linear-gradient(90deg,#3b82f6,#6366f1)}
+.progress-fill.emerald{background:linear-gradient(90deg,#10b981,#14b8a6)}
+.progress-fill.amber{background:linear-gradient(90deg,#f59e0b,#f97316)}
+.hidden{display:none}
+.lessons{background:#1e293b;border:1px solid #334155;border-radius:12px;overflow:hidden}
+.lessons-header{padding:1rem;border-bottom:1px solid #334155;font-weight:600;color:#fff}
+.lesson{padding:1rem;border-bottom:1px solid #334155;display:flex;align-items:center;justify-content:between;cursor:pointer}
+.lesson:hover{background:rgba(51,65,85,0.5)}
+.lesson:last-child{border-bottom:none}
+.lesson-left{display:flex;align-items:center;gap:1rem;flex:1}
+.lesson-num{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.875rem;background:#334155;color:#94a3b8}
+.lesson-num.done{background:#10b981;color:#fff}
+.lesson-title{font-weight:500;color:#fff}
+.lesson-title.done{color:#64748b}
+.lesson-meta{font-size:0.75rem;color:#64748b;margin-top:0.25rem}
+.lesson-arrow{color:#475569}
+.back-link{color:#94a3b8;font-size:0.875rem;margin-bottom:1rem;cursor:pointer}
+.back-link:hover{color:#fff}
+.lesson-detail{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:1.5rem}
+.lesson-detail h1{font-size:1.5rem;color:#fff;margin-bottom:1rem}
+.lesson-detail p{color:#cbd5e1;margin-bottom:1rem}
+.tip{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:12px;padding:1rem;margin-top:1rem}
+.tip-label{color:#fbbf24;font-weight:600}
+.tip-text{color:#cbd5e1}
+.complete-btn{padding:0.75rem 1.5rem;border-radius:8px;border:none;cursor:pointer;font-weight:500;background:#334155;color:#cbd5e1;margin-top:1rem}
+.complete-btn.done{background:#10b981;color:#fff}
+.nav-btns-inner{display:flex;justify-content:space-between;margin-top:1.5rem}
+.week-tabs{display:flex;gap:0.5rem;overflow-x:auto;padding-bottom:0.5rem;margin-bottom:1rem}
+.week-tab{padding:0.5rem 1rem;border-radius:8px;border:none;cursor:pointer;font-size:0.875rem;white-space:nowrap;background:#334155;color:#94a3b8}
+.week-tab.active{background:#6366f1;color:#fff}
+.week-card{background:#1e293b;border:1px solid #334155;border-radius:12px;overflow:hidden}
+.week-header{padding:1.5rem;border-bottom:1px solid #334155;background:linear-gradient(90deg,rgba(51,65,85,0.5),transparent)}
+.week-title{font-size:1.25rem;font-weight:700;color:#fff}
+.week-theme{color:#94a3b8;font-size:0.875rem;margin-top:0.25rem}
+.week-progress{font-size:1.5rem;font-weight:700;color:#818cf8}
+.task{padding:1rem;border-bottom:1px solid #334155;display:flex;align-items:center;gap:1rem}
+.task:last-child{border-bottom:none}
+.task-check{width:20px;height:20px;border-radius:9999px;border:2px solid #475569;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.task-check.done{background:#10b981;border-color:#10b981;color:#fff;font-size:0.75rem}
+.task-text{color:#fff}
+.task-text.done{color:#64748b;text-decoration:line-through}
+@media(max-width:640px){.stats{grid-template-columns:1fr}.hero h1{font-size:1.5rem}}
+</style>
+</head>
+<body>
+<nav class="nav">
+<div class="nav-inner">
+<div class="logo">
+<div class="logo-icon">🚀</div>
+<span class="logo-text">Agency Mastery</span>
+</div>
+<div class="nav-btns">
+<button class="nav-btn active" id="nav-home" onclick="showHome()">Home</button>
+<button class="nav-btn" id="nav-learn" onclick="showLearn()">Learn</button>
+<button class="nav-btn" id="nav-plan" onclick="showPlan()">Plan</button>
+</div>
+</div>
+</nav>
+<main class="main" id="main"></main>
+<script>
+var store={done:{},tasks:{}};
+try{store=JSON.parse(localStorage.getItem('am'))||{done:{},tasks:{}};}catch(e){store={done:{},tasks:{}};}
+function save(){localStorage.setItem('am',JSON.stringify(store));}
+
+var mods=[
+{id:'f',name:'The Foundation',sub:'Mindset & Psychology',icon:'🧠',color:'violet',
+lessons:[
+{t:'The Imposter Truth',m:'30m',y:'Mindset',o:'Everyone feels like a fraud at first. The difference is taking action anyway.',tip:'Ask what you would do if you could not fail. Then do it.'},
+{t:'No-Portfolio Problem',m:'45m',y:'Strategy',o:'You need proof of competence, not a portfolio. Free work, spec work, or certifications.',tip:'First 2-3 clients are learning investments.'},
+{t:'Decision Framework',m:'30m',y:'Framework',o:'Most people fail from making NO decisions, not wrong ones. Use the 70% rule.',tip:'If you have been researching the same question for 48 hours, you are procrastinating.'},
+{t:'Choose Your Path',m:'45m',y:'Strategy',o:'Solo freelancer, specialist agency, or partnership. Pick one to start.',tip:'Partnership accelerates growth but needs clear agreements upfront.'}
+]},
+{id:'m',name:'Meta Ads Mastery',sub:'2025 Playbook',icon:'🎯',color:'blue',
+lessons:[
+{t:'2025 Meta Landscape',m:'45m',y:'Foundation',o:'Meta is AI-first now. Advantage+ is the default. Your job is feeding it signals.',tip:'Advantage+ delivers 9% lower CPA on average.'},
+{t:'Campaign Architecture',m:'60m',y:'Technical',o:'Campaign, Ad Set, Ad hierarchy. Keep it simple - one campaign per objective.',tip:'Let learning phase complete before making changes.'},
+{t:'Creative Strategy',m:'75m',y:'Strategy',o:'Creative drives 70-80% of performance. UGC gets 4x CTR. First 3 seconds matter.',tip:'You do not need to create ads, but must understand what works.'},
+{t:'Tracking Setup',m:'60m',y:'Technical',o:'Pixel + Conversions API, both required. EMQ target is 6+.',tip:'Fix tracking BEFORE running any ads.'},
+{t:'Testing Framework',m:'60m',y:'Strategy',o:'3-5 angles per cycle. Minimum 7 days. Kill ads at 2x target CPA.',tip:'2 conversions vs 1 means nothing. Wait for real data.'},
+{t:'Scaling Campaigns',m:'45m',y:'Strategy',o:'Need consistent CPA for 5+ days before scaling. 20-30% increments max.',tip:'Scaling is earned by stable performance.'},
+{t:'Client Reporting',m:'45m',y:'Operations',o:'Weekly summary, bi-weekly call, monthly deep-dive. End with next steps.',tip:'Bad news delivered proactively is forgivable.'}
+]},
+{id:'o',name:'Client Acquisition',sub:'Zero to Pipeline',icon:'📧',color:'emerald',
+lessons:[
+{t:'Acquisition Landscape',m:'30m',y:'Foundation',o:'Referrals, cold outreach, content, platforms, networking. Pick 1-2 channels.',tip:'Best founders are good at both delivery AND sales.'},
+{t:'Define Your Target',m:'45m',y:'Strategy',o:'Industry, size, decision maker, pain points, triggers. Be specific.',tip:'Industry experience is a natural niche advantage.'},
+{t:'Cold Email Setup',m:'60m',y:'Technical',o:'Apollo.io for outreach. Secondary domains only. 2 week warmup minimum.',tip:'Keep emails under 100 words.'},
+{t:'Building Lists',m:'60m',y:'Strategy',o:'50-person list with 30% reply beats 500-person list with 2%.',tip:'Recently funded companies (30-90 days) respond more.'},
+{t:'Sequences',m:'45m',y:'Technical',o:'Day 0 initial, Day 3 case study, Day 5 LinkedIn, Day 7 value, Day 14 break-up.',tip:'Break-up email often gets highest response.'},
+{t:'LinkedIn Strategy',m:'30m',y:'Strategy',o:'View profile, connect, then email. Email + LinkedIn = 2-3x response.',tip:'Warm connection after profile view = 3x acceptance rate.'},
+{t:'Discovery Calls',m:'45m',y:'Strategy',o:'Listen 70%, talk 30%. Understand situation, qualify, present solution.',tip:'Best close is no close. Good discovery makes decision obvious.'}
+]},
+{id:'b',name:'Agency Operations',sub:'Building Real Business',icon:'💰',color:'amber',
+lessons:[
+{t:'Pricing Strategy',m:'60m',y:'Foundation',o:'Retainer ($1.5-10K+), percentage (10-20%), or hybrid. Anchor high.',tip:'Quote $3,500, they counter $2,500, you are fine.'},
+{t:'Contracts',m:'45m',y:'Technical',o:'Scope, payment terms, termination clause. Simple contract beats none.',tip:'Never start without signed contract and first payment.'},
+{t:'Client Onboarding',m:'45m',y:'Operations',o:'Access, info gathering, expectations, timeline, kickoff call.',tip:'Partner access in Business Manager, not admin.'},
+{t:'Communication',m:'45m',y:'Operations',o:'Weekly summary, bi-weekly call, monthly review. Silence creates anxiety.',tip:'Proactive bad news is forgivable.'},
+{t:'Partnership Terms',m:'30m',y:'Foundation',o:'Revenue split, roles, client ownership, disputes, exit terms.',tip:'Best time to negotiate is before you have money.'},
+{t:'Scaling Systems',m:'45m',y:'Strategy',o:'Manual first, then SOPs, then automate, then productize.',tip:'Upselling existing clients is 5x easier than new ones.'}
+]}
+];
+
+var weeks=[
+{name:'Foundation',theme:'Set up everything first',tasks:['Complete Foundation module','Decide Solo/Partnership','Set up Meta Business Suite','Create Apollo account','Buy secondary domains','Set up email warmup']},
+{name:'Deep Learning',theme:'Knowledge compounds',tasks:['Complete Meta Ads module','Practice in Ads Manager','Complete first 4 Acquisition lessons','Define ICP precisely','Build 50-company list','Write 3 email templates']},
+{name:'Offer & Outreach',theme:'Clarity equals results',tasks:['Complete Operations module','Create 2-3 pricing tiers','Get contract template','Send first 25 cold emails','Monitor reply rates daily','Add LinkedIn touches']},
+{name:'Full Launch',theme:'Consistency beats intensity',tasks:['Scale to 50+ emails per day','Add 100 new prospects','Follow up engaged prospects','Create discovery call script','Book first discovery calls','Document what works']},
+{name:'Sales Week',theme:'Listen more than talk',tasks:['Conduct discovery calls','Create custom proposals','Prepare objection responses','Follow up all proposals','Continue daily outreach','Weekly performance review']},
+{name:'Close & Launch',theme:'First client changes everything',tasks:['Follow up all proposals','Negotiate and close','Collect contract and payment','Execute onboarding checklist','Run kickoff call','Celebrate and document!']}
+];
+
+var currentMod=null,currentLesson=null,currentWeek=0;
+
+function setNav(active){
+['home','learn','plan'].forEach(function(n){
+var btn=document.getElementById('nav-'+n);
+btn.className=n===active?'nav-btn active':'nav-btn';
+});
+}
+
+function getProgress(id){
+var mod=mods.find(function(m){return m.id===id;});
+var done=mod.lessons.filter(function(l,i){return store.done[id+'-'+i];}).length;
+return Math.round(done/mod.lessons.length*100);
+}
+
+function getTotalProgress(){
+var total=0,done=0;
+mods.forEach(function(m){
+total+=m.lessons.length;
+m.lessons.forEach(function(l,i){if(store.done[m.id+'-'+i])done++;});
+});
+return Math.round(done/total*100);
+}
+
+function getWeekProgress(i){
+var w=weeks[i];
+var done=w.tasks.filter(function(t,j){return store.tasks[i+'-'+j];}).length;
+return Math.round(done/w.tasks.length*100);
+}
+
+function showHome(){
+setNav('home');
+currentMod=null;currentLesson=null;
+var p=getTotalProgress();
+var h='<div class="hero"><div class="badge">🚀 Zero to First Client in 6 Weeks</div><h1>Agency Launch Mastery</h1><p>Complete system for starting a profitable Meta ads agency. Mindset, technical skills, client acquisition, and operations.</p><div class="btns"><button class="btn btn-primary" onclick="showLearn()">📚 Start Learning</button><button class="btn btn-secondary" onclick="showPlan()">📅 View Blueprint</button></div></div>';
+h+='<div class="stats"><div class="stat"><div class="stat-label">Progress</div><div class="stat-value">'+p+'%</div></div><div class="stat"><div class="stat-label">Modules</div><div class="stat-value">4</div></div><div class="stat"><div class="stat-label">Weeks</div><div class="stat-value">6</div></div></div>';
+h+='<div class="section-title">The Curriculum</div><div class="modules">';
+mods.forEach(function(m){
+var prog=getProgress(m.id);
+h+='<div class="module" onclick="currentMod=\''+m.id+'\';showLearn()"><div class="module-header"><div class="module-icon '+m.color+'">'+m.icon+'</div><div class="module-content"><div class="module-title">'+m.name+'</div><div class="module-sub">'+m.sub+'</div><div class="module-meta">'+m.lessons.length+' lessons</div></div><div class="module-progress">'+prog+'%</div></div><div class="progress-bar"><div class="progress-fill '+m.color+'" style="width:'+prog+'%"></div></div></div>';
+});
+h+='</div>';
+document.getElementById('main').innerHTML=h;
+}
+
+function showLearn(){
+setNav('learn');
+if(currentLesson!==null&&currentMod){
+var mod=mods.find(function(m){return m.id===currentMod;});
+var les=mod.lessons[currentLesson];
+var isDone=store.done[currentMod+'-'+currentLesson];
+var h='<div class="back-link" onclick="currentLesson=null;showLearn()">← Back to '+mod.name+'</div>';
+h+='<div class="lesson-detail"><h1>'+les.t+'</h1><div class="module-meta">'+les.y+' • '+les.m+'</div><p style="margin-top:1rem">'+les.o+'</p><div class="tip"><span class="tip-label">Pro Tip: </span><span class="tip-text">'+les.tip+'</span></div><button class="complete-btn '+(isDone?'done':'')+'" onclick="store.done[\''+currentMod+'-'+currentLesson+'\']=!store.done[\''+currentMod+'-'+currentLesson+'\'];save();showLearn()">✓ '+(isDone?'Completed':'Mark Complete')+'</button></div>';
+h+='<div class="nav-btns-inner">';
+if(currentLesson>0)h+='<button class="btn btn-secondary" onclick="currentLesson='+(currentLesson-1)+';showLearn()">← Previous</button>';
+else h+='<button class="btn btn-secondary" onclick="currentLesson=null;showLearn()">← Back</button>';
+if(currentLesson<mod.lessons.length-1)h+='<button class="btn btn-primary" onclick="currentLesson='+(currentLesson+1)+';showLearn()">Next →</button>';
+else h+='<button class="btn btn-primary" onclick="currentLesson=null;showLearn()">Done</button>';
+h+='</div>';
+document.getElementById('main').innerHTML=h;
+return;
+}
+if(currentMod){
+var mod=mods.find(function(m){return m.id===currentMod;});
+var prog=getProgress(currentMod);
+var h='<div class="back-link" onclick="currentMod=null;showLearn()">← Back to Modules</div>';
+h+='<div class="hero" style="background:linear-gradient(135deg,#1e293b,#1e293b)"><h1>'+mod.name+'</h1><p>'+mod.sub+' • '+prog+'% complete</p></div>';
+h+='<div class="lessons"><div class="lessons-header">Lessons</div>';
+mod.lessons.forEach(function(les,i){
+var isDone=store.done[currentMod+'-'+i];
+h+='<div class="lesson" onclick="currentLesson='+i+';showLearn()"><div class="lesson-left"><div class="lesson-num '+(isDone?'done':'')+'">'+(isDone?'✓':(i+1))+'</div><div><div class="lesson-title '+(isDone?'done':'')+'">'+les.t+'</div><div class="lesson-meta">'+les.y+' • '+les.m+'</div></div></div><div class="lesson-arrow">›</div></div>';
+});
+h+='</div>';
+document.getElementById('main').innerHTML=h;
+return;
+}
+var h='<div class="section-title">Learn</div><div class="modules">';
+mods.forEach(function(m){
+var prog=getProgress(m.id);
+h+='<div class="module" onclick="currentMod=\''+m.id+'\';showLearn()"><div class="module-header"><div class="module-icon '+m.color+'">'+m.icon+'</div><div class="module-content"><div class="module-title">'+m.name+'</div><div class="module-sub">'+m.sub+'</div><div class="module-meta">'+m.lessons.length+' lessons</div></div><div class="module-progress">'+prog+'%</div></div><div class="progress-bar"><div class="progress-fill '+m.color+'" style="width:'+prog+'%"></div></div></div>';
+});
+h+='</div>';
+document.getElementById('main').innerHTML=h;
+}
+
+function showPlan(){
+setNav('plan');
+var w=weeks[currentWeek];
+var prog=getWeekProgress(currentWeek);
+var h='<div class="section-title">6-Week Blueprint</div><div class="week-tabs">';
+weeks.forEach(function(wk,i){
+h+='<button class="week-tab '+(currentWeek===i?'active':'')+'" onclick="currentWeek='+i+';showPlan()">Week '+(i+1)+'</button>';
+});
+h+='</div><div class="week-card"><div class="week-header"><div style="display:flex;justify-content:space-between;align-items:start"><div><div class="week-title">'+w.name+'</div><div class="week-theme">"'+w.theme+'"</div></div><div class="week-progress">'+prog+'%</div></div></div>';
+w.tasks.forEach(function(t,i){
+var isDone=store.tasks[currentWeek+'-'+i];
+h+='<div class="task"><div class="task-check '+(isDone?'done':'')+'" onclick="store.tasks[\''+currentWeek+'-'+i+'\']=!store.tasks[\''+currentWeek+'-'+i+'\'];save();showPlan()">'+(isDone?'✓':'')+'</div><span class="task-text '+(isDone?'done':'')+'">'+t+'</span></div>';
+});
+h+='</div>';
+document.getElementById('main').innerHTML=h;
+}
+
+showHome();
+</script>
+</body>
+</html>
